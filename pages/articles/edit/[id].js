@@ -183,14 +183,10 @@ export default function EditArticle({ article }) {
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 İçerik
               </label>
-              <div data-color-mode={isDarkMode ? "dark" : "light"}>
-                <MDEditor
-                  value={formData.content}
-                  onChange={(value) => setFormData(prev => ({ ...prev, content: value || '' }))}
-                  preview="edit"
-                  height={400}
-                />
-              </div>
+              <MarkdownEditor
+                value={formData.content}
+                onChange={(value) => setFormData(prev => ({ ...prev, content: value }))}
+              />
             </div>
 
             <div className="flex justify-end gap-4">
