@@ -205,54 +205,60 @@ export default function Home({ articles, articlesContent, commentCounts }) {
               <div className="space-y-6">
                 {articles.map(article => (
                   <article 
-                    key={article.id} 
-                    className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-300 hover:scale-[1.02] border border-gray-200 dark:border-gray-700 hover:shadow-xl flex gap-6"
+                    key={article.id}
+                    className="flex flex-col md:flex-row gap-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-4 sm:p-6 transition-all duration-300 hover:shadow-xl border border-gray-200 dark:border-gray-700"
                   >
-                    <div className="relative w-48 shrink-0 cursor-pointer group">
+                    <div className="relative w-full md:w-48 aspect-[2/1] md:aspect-square flex-shrink-0">
                       <Link href={`/articles/${article.id}`}>
                         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg" />
                         <Image
                           src={article.image}
                           alt={article.title}
-                          width={192}
-                          height={108}
-                          className="rounded-lg object-cover transition-transform group-hover:scale-105"
+                          fill
+                          className="rounded-lg object-cover"
+                          sizes="(max-width: 768px) 100vw, 200px"
                         />
                       </Link>
                     </div>
-                    <div className="flex-1">
-                      <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-100">
+                    
+                    <div className="flex-1 min-w-0">
+                      <h2 className="text-xl sm:text-2xl font-semibold mb-2 text-gray-800 dark:text-gray-100 line-clamp-2">
                         {article.title}
                       </h2>
-                      <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                      
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-sm text-gray-500 dark:text-gray-400 mb-3">
                         <Link 
                           href={`/users/${article.authorId}`}
-                          className="hover:text-primary-600 dark:hover:text-primary-400 font-medium"
+                          className="hover:text-primary-600 dark:hover:text-primary-400 font-medium truncate"
                         >
                           {article.author}
                         </Link>
-                        <span>•</span>
-                        <time dateTime={article.date}>
+                        <span className="hidden sm:inline">•</span>
+                        <time dateTime={article.date} className="truncate">
                           {new Date(article.date).toLocaleDateString('tr-TR')}
                         </time>
-                        <span>•</span>
+                        <span className="hidden sm:inline">•</span>
                         <div className="flex items-center gap-1">
-                          <FaEye size={14} />
+                          <FaEye size={14} className="flex-shrink-0" />
                           <span>{article.views || 0}</span>
                         </div>
-                        <span>•</span>
+                        <span className="hidden sm:inline">•</span>
                         <div className="flex items-center gap-1">
-                          <FaComment size={14} />
+                          <FaComment size={14} className="flex-shrink-0" />
                           <span>{commentCounts[article.id] || 0}</span>
                         </div>
                       </div>
-                      <p className="text-gray-600 dark:text-gray-300 mb-4">{article.summary}</p>
+                      
+                      <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2 text-sm sm:text-base">
+                        {article.summary}
+                      </p>
+                      
                       <Link 
                         href={`/articles/${article.id}`}
-                        className="mt-4 text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium flex items-center gap-2 group"
+                        className="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium text-sm"
                       >
-                        Devamını Oku 
-                        <span className="text-lg transition-transform group-hover:translate-x-1">→</span>
+                        Devamını Oku
+                        <FaArrowRight className="ml-2 h-4 w-4" />
                       </Link>
                     </div>
                   </article>
