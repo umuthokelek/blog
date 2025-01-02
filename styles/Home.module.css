@@ -1,92 +1,697 @@
+.banner {
+  position: relative;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+  border-radius: 0 0 50px 50px;
+  overflow: hidden;
+}
+
+.bannerContent {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  color: white;
+  z-index: 1;
+  text-align: center;
+}
+
+.bannerContent h2 {
+  font-size: 2.5rem;
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+}
+
+.bannerContent p {
+  font-size: 1.2rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.bannerShape {
+  position: absolute;
+  bottom: -50%;
+  left: -10%;
+  right: -10%;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(-3deg);
+  border-radius: 50%;
+}
+
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 0;
+}
+
+.main {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.formGroup {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroup label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #4a5568;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Adres alanının tam genişlikte olması için */
+.formGroup:last-of-type {
+  grid-column: 1 / -1;
+}
+
+.submitButton {
+  grid-column: 1 / -1;
+  background: #4299e1;
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 1rem;
+}
+
+.submitButton:hover {
+  background: #3182ce;
+}
+
+.submitButton:active {
+  transform: translateY(1px);
+}
+
+/* Responsive tasarım için */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .main {
+    padding: 1.5rem;
+  }
+  
+  .form {
+    grid-template-columns: 1fr;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+
+  .banner {
+    padding: 2rem 1rem;
+    border-radius: 0 0 30px 30px;
+  }
+
+  .bannerContent h2 {
+    font-size: 2rem;
+  }
+
+  .bannerContent p {
+    font-size: 1rem;
+  }
+}
+
+/* Menu stilleri */
+.menu {
+  background: white;
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu ul {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: flex;
   justify-content: center;
-  align-items: center;
+  gap: 2rem;
 }
 
-.title a {
-  color: #0070f3;
+.menu a {
   text-decoration: none;
+  color: #4a5568;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
 }
 
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
+.menu a:hover {
+  color: #4299e1;
+  background: #f7fafc;
 }
 
-.title {
-  margin: 0 0 1rem;
-  line-height: 1.15;
-  font-size: 3.6rem;
+.menu a.active {
+  color: #4299e1;
+  background: #ebf8ff;
 }
 
-.title {
-  text-align: center;
+/* Footer stilleri */
+.footer {
+  background: #2d3748;
+  color: white;
+  margin-top: 4rem;
+  padding: 4rem 2rem 2rem;
 }
 
-.title,
-.description {
-  text-align: center;
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
 }
 
-.description {
-  line-height: 1.5;
-  font-size: 1.5rem;
+.footerSection h3 {
+  color: #e2e8f0;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
 }
 
-.grid {
+.footerSection p {
+  color: #a0aec0;
+  margin: 0.5rem 0;
+}
+
+.footerSection ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footerSection ul li {
+  margin-bottom: 0.75rem;
+}
+
+.footerSection a {
+  color: #a0aec0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footerSection a:hover {
+  color: #4299e1;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1rem;
+}
+
+.socialLinks a {
+  background: #4a5568;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  transition: background 0.3s ease;
+}
 
-  max-width: 800px;
+.socialLinks a:hover {
+  background: #4299e1;
+  color: white;
+}
+
+.footerBottom {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #4a5568;
+  color: #a0aec0;
+}
+
+/* Responsive düzenlemeler */
+@media (max-width: 768px) {
+  .menu ul {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .footerContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footerSection {
+    text-align: center;
+  }
+
+  .socialLinks {
+    justify-content: center;
+  }
+}
+
+/* Ana sayfa içerik stilleri */
+.homeContent {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
   margin-top: 3rem;
 }
 
-.card {
-  margin: 1rem;
-  flex-basis: 45%;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
+.featureCard {
+  background: #f8fafc;
+  padding: 2rem;
   border-radius: 10px;
-  transition:
-    color 0.15s ease,
-    border-color 0.15s ease;
+  transition: transform 0.3s ease;
 }
 
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+.featureCard:hover {
+  transform: translateY(-5px);
 }
 
-.card h3 {
-  margin: 0 0 1rem 0;
+.featureCard h3 {
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+.featureCard p {
+  color: #4a5568;
+}
+
+/* Hakkımızda sayfası stilleri */
+.aboutContent {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.aboutStats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.statCard {
+  background: #f8fafc;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.statCard h3 {
+  color: #4299e1;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* İletişim sayfası stilleri */
+.contactContent {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.contactInfo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.contactCard {
+  background: #f8fafc;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.contactCard h3 {
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+/* Responsive düzenlemeler */
+@media (max-width: 768px) {
+  .features,
+  .aboutStats,
+  .contactInfo {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Makale listesi stilleri */
+.articles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.articleCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.articleCard:hover {
+  transform: translateY(-5px);
+}
+
+.articleCard img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.articleInfo {
+  padding: 1.5rem;
+}
+
+.articleInfo h2 {
+  color: #2d3748;
   font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
+.articleMeta {
+  display: flex;
+  gap: 1rem;
+  color: #718096;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
 }
 
-.logo {
-  height: 1em;
+.articleSummary {
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
 }
 
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
+.readMore {
+  background: #4299e1;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.readMore:hover {
+  background: #3182ce;
+}
+
+/* Makale detay sayfası stilleri */
+.articleDetail {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.articleDetail img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.articleDetail h1 {
+  font-size: 2.5rem;
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+.articleDetail p {
+  color: #4a5568;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.backButton {
+  background: none;
+  border: none;
+  color: #4299e1;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.backButton:hover {
+  color: #3182ce;
+}
+
+/* Responsive düzenlemeler */
+@media (max-width: 768px) {
+  .articles {
+    grid-template-columns: 1fr;
+  }
+
+  .articleDetail {
+    padding: 1rem;
+  }
+
+  .articleDetail h1 {
+    font-size: 2rem;
+  }
+}
+
+/* Makale resim container'ı için yeni stil */
+.articleImage {
+  position: relative;
+  width: 100%;
+  height: 200px; /* Ana sayfa kartları için */
+}
+
+.articleDetail .articleImage {
+  height: 400px; /* Detay sayfası için daha büyük */
+}
+
+/* Mevcut articleCard img stilini kaldırın ve yerine bunu ekleyin */
+.articleImage img {
+  object-fit: cover;
+}
+
+/* Theme toggle switch stilleri */
+.themeToggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Dark mode stilleri */
+.darkMode {
+  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+}
+
+.darkMode .main {
+  background: #2d3748;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.darkMode .title {
+  color: #e2e8f0;
+}
+
+.darkMode .menu {
+  background: #2d3748;
+}
+
+.darkMode .menu a {
+  color: #e2e8f0;
+}
+
+.darkMode .menu a:hover {
+  background: #4a5568;
+  color: #63b3ed;
+}
+
+.darkMode .menu a.active {
+  background: #4a5568;
+  color: #63b3ed;
+}
+
+.darkMode .articleCard {
+  background: #2d3748;
+}
+
+.darkMode .articleInfo h2 {
+  color: #e2e8f0;
+}
+
+.darkMode .articleSummary {
+  color: #a0aec0;
+}
+
+.darkMode .articleMeta {
+  color: #a0aec0;
+}
+
+.darkMode .formGroup label {
+  color: #e2e8f0;
+}
+
+.darkMode .formGroup input,
+.darkMode .formGroup select,
+.darkMode .formGroup textarea {
+  background: #4a5568;
+  border-color: #718096;
+  color: #e2e8f0;
+}
+
+.darkMode .formGroup input:focus,
+.darkMode .formGroup select:focus,
+.darkMode .formGroup textarea:focus {
+  border-color: #63b3ed;
+  box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.1);
+}
+
+.darkMode .featureCard,
+.darkMode .statCard,
+.darkMode .contactCard {
+  background: #2d3748;
+}
+
+.darkMode .featureCard h3,
+.darkMode .contactCard h3 {
+  color: #e2e8f0;
+}
+
+.darkMode .featureCard p,
+.darkMode .contactCard p {
+  color: #a0aec0;
+}
+
+.darkMode .footer {
+  background: #1a202c;
+}
+
+.darkMode .articleDetail {
+  color: #e2e8f0;
+}
+
+.darkMode .articleDetail p {
+  color: #a0aec0;
+}
+
+.darkMode .backButton {
+  color: #63b3ed;
+}
+
+.darkMode .backButton:hover {
+  color: #4299e1;
+}
+
+/* Responsive düzenlemeler */
+@media (max-width: 768px) {
+  .themeToggle {
+    top: 0.5rem;
+    right: 0.5rem;
   }
 }

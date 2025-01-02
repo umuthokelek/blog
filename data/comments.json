@@ -1,0 +1,40 @@
+{
+  "comments": [
+    {
+      "id": 1735846559738,
+      "articleId": 1735846307982,
+      "name": "gfgdfgdf",
+      "email": "sgsd@gmail.com",
+      "content": "sdkgskgsdk",
+      "date": "2025-01-02T19:35:59.738Z",
+      "replyTo": null
+    },
+    {
+      "id": 1735847107120,
+      "articleId": 1735846307982,
+      "name": "isimmmm",
+      "email": "afsafas@gafas.com",
+      "content": "icerigimmm",
+      "date": "2025-01-02T19:45:07.120Z",
+      "replyTo": 1735846559738
+    },
+    {
+      "id": 1735847116049,
+      "articleId": 1735846307982,
+      "name": "boyle",
+      "email": "afsa@gafas.com",
+      "content": "gider",
+      "date": "2025-01-02T19:45:16.049Z",
+      "replyTo": 1735847107120
+    },
+    {
+      "id": 1735847256351,
+      "articleId": 1,
+      "name": "yorumm",
+      "email": "afas@afas.com",
+      "content": "afjasjfsajs",
+      "date": "2025-01-02T19:47:36.351Z",
+      "replyTo": null
+    }
+  ]
+}
