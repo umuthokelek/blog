@@ -145,13 +145,13 @@ export default function Home({ articles, articlesContent, commentCounts }) {
             </div>
 
             {viewMode === 'grid' ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {articles.map(article => (
                   <article 
                     key={article.id} 
-                    className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-300 hover:scale-105 border border-gray-200 dark:border-gray-700 hover:shadow-xl"
+                    className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl shadow p-3 sm:p-6 transition-all duration-300 hover:shadow-xl border border-gray-200 dark:border-gray-700"
                   >
-                    <div className="relative aspect-[2/1] mb-4 cursor-pointer group">
+                    <div className="relative aspect-[2/1] mb-3 sm:mb-4 cursor-pointer group">
                       <Link href={`/articles/${article.id}`}>
                         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg" />
                         <Image
@@ -159,43 +159,41 @@ export default function Home({ articles, articlesContent, commentCounts }) {
                           alt={article.title}
                           fill
                           className="rounded-lg object-cover transition-transform group-hover:scale-105"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          sizes="(max-width: 640px) 50vw, (max-width: 1200px) 33vw"
                         />
                       </Link>
                     </div>
-                    <div className="mb-4">
-                      <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-100">
+                    <div>
+                      <h2 className="text-base sm:text-2xl font-semibold mb-2 sm:mb-4 text-gray-800 dark:text-gray-100 line-clamp-2">
                         {article.title}
                       </h2>
-                      <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                      <div className="space-y-1 mb-2 sm:mb-4">
                         <Link 
                           href={`/users/${article.authorId}`}
-                          className="hover:text-primary-600 dark:hover:text-primary-400 font-medium"
+                          className="block text-xs sm:text-sm hover:text-primary-600 dark:hover:text-primary-400 font-medium truncate text-gray-500 dark:text-gray-400"
                         >
                           {article.author}
                         </Link>
-                        <span>•</span>
-                        <time dateTime={article.date}>
-                          {new Date(article.date).toLocaleDateString('tr-TR')}
-                        </time>
-                        <span>•</span>
-                        <div className="flex items-center gap-1">
-                          <FaEye size={14} />
-                          <span>{article.views || 0}</span>
-                        </div>
-                        <span>•</span>
-                        <div className="flex items-center gap-1">
-                          <FaComment size={14} />
-                          <span>{commentCounts[article.id] || 0}</span>
+                        <div className="flex items-center gap-3 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                          <div className="flex items-center gap-1">
+                            <FaEye size={12} className="flex-shrink-0" />
+                            <span>{article.views || 0}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <FaComment size={12} className="flex-shrink-0" />
+                            <span>{commentCounts[article.id] || 0}</span>
+                          </div>
                         </div>
                       </div>
-                      <p className="text-gray-600 dark:text-gray-300 mb-4">{article.summary}</p>
+                      <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-base line-clamp-2 mb-2 sm:mb-4">
+                        {article.summary}
+                      </p>
                       <Link 
                         href={`/articles/${article.id}`}
-                        className="mt-4 text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium flex items-center gap-2 group"
+                        className="text-xs sm:text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium flex items-center gap-1 sm:gap-2"
                       >
-                        Devamını Oku 
-                        <span className="text-lg transition-transform group-hover:translate-x-1">→</span>
+                        Devamını Oku
+                        <FaArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
                       </Link>
                     </div>
                   </article>
