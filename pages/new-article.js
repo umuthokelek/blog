@@ -2,8 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { FaImage, FaTimes, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 import { Pacifico } from 'next/font/google';
-import SimpleMDE from 'react-simplemde-editor';
-import 'easymde/dist/easymde.min.css';
+import dynamic from 'next/dynamic';
 
 const pacifico = Pacifico({ 
   subsets: ['latin'],
@@ -16,6 +15,14 @@ const socialLinks = [
   { icon: <FaInstagram size={18} />, name: 'Instagram', href: '#' },
   { icon: <FaLinkedinIn size={18} />, name: 'LinkedIn', href: '#' },
 ];
+
+const SimpleMDE = dynamic(
+  () => import('react-simplemde-editor').then((mod) => {
+    import('easymde/dist/easymde.min.css');
+    return mod.default;
+  }),
+  { ssr: false }
+);
 
 export default function NewArticle() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -225,10 +232,10 @@ export default function NewArticle() {
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 İçerik
               </label>
-              <div className="prose dark:prose-invert max-w-none">
+              <div className="prose dark:prose-invert max-w-none" data-color-mode={isDarkMode ? "dark" : "light"}>
                 <SimpleMDE
                   value={formData.content}
-                  onChange={handleEditorChange}
+                  onChange={(value) => setFormData(prev => ({ ...prev, content: value || '' }))}
                   options={editorOptions}
                 />
               </div>
