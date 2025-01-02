@@ -16,11 +16,8 @@ const socialLinks = [
   { icon: <FaLinkedinIn size={18} />, name: 'LinkedIn', href: '#' },
 ];
 
-const SimpleMDE = dynamic(
-  () => import('react-simplemde-editor').then((mod) => {
-    import('easymde/dist/easymde.min.css');
-    return mod.default;
-  }),
+const MDEditor = dynamic(
+  () => import("@uiw/react-md-editor"),
   { ssr: false }
 );
 
@@ -232,11 +229,12 @@ export default function NewArticle() {
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 İçerik
               </label>
-              <div className="prose dark:prose-invert max-w-none" data-color-mode={isDarkMode ? "dark" : "light"}>
-                <SimpleMDE
+              <div data-color-mode={isDarkMode ? "dark" : "light"}>
+                <MDEditor
                   value={formData.content}
                   onChange={(value) => setFormData(prev => ({ ...prev, content: value || '' }))}
-                  options={editorOptions}
+                  preview="edit"
+                  height={400}
                 />
               </div>
             </div>
