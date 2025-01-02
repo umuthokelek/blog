@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { FaImage, FaTimes } from 'react-icons/fa';
-import { Pacifico } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import dynamic from 'next/dynamic';
 import { getAllArticles } from '../../../lib/articles';
 
@@ -15,10 +15,7 @@ if (typeof window !== 'undefined') {
   import('easymde/dist/easymde.min.css');
 }
 
-const pacifico = Pacifico({ 
-  subsets: ['latin'],
-  weight: ['400'],
-});
+const inter = Inter({ subsets: ['latin'] });
 
 export async function getStaticPaths() {
   const articles = getAllArticles();

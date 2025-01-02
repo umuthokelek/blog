@@ -1,12 +1,18 @@
 import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { FaImage, FaTimes, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
-import { Pacifico } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import dynamic from 'next/dynamic';
+import localFont from 'next/font/local';
+import { Pacifico } from 'next/font/google'
 
-const pacifico = Pacifico({ 
+const inter = Inter({ subsets: ['latin'] });
+
+const pacifico = Pacifico({
+  weight: '400',
   subsets: ['latin'],
-  weight: ['400'],
+  display: 'swap',
+  fallback: ['cursive'],
 });
 
 const socialLinks = [
@@ -113,7 +119,7 @@ export default function NewArticle() {
         <div className="relative mx-auto max-w-4xl px-4 py-16">
           <div className="text-center">
             <Link href="/">
-              <h2 className={`${pacifico.className} bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-200 text-7xl animate-fade-in hover:scale-105 transition-transform duration-300 cursor-pointer`}>
+              <h2 className={`${inter.className} bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-200 text-7xl animate-fade-in hover:scale-105 transition-transform duration-300 cursor-pointer`}>
                 Umut Hökelek
               </h2>
             </Link>
