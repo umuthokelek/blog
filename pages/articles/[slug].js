@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaEdit, FaTrash, FaReply } from 'react-icons/fa';
 import { getAllArticles, processMarkdown } from '../../lib/articles';
 import { Pacifico } from 'next/font/google';
+import { useRouter } from 'next/router';
 
 const pacifico = Pacifico({ 
   subsets: ['latin'],
@@ -134,6 +135,8 @@ export default function Article({ article, articles }) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [replyingTo, setReplyingTo] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const isDark = localStorage.getItem('theme') === 'dark';
@@ -276,46 +279,83 @@ export default function Article({ article, articles }) {
   const commentTree = buildCommentTree(comments);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
       <div className="relative overflow-hidden bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="absolute inset-0 bg-gradient-to-r from-primary-50 to-transparent dark:from-primary-900/10 dark:to-transparent"></div>
 
         <div className="relative mx-auto max-w-4xl px-4 py-8">
           <div className="text-center">
-            <Link href="/">
-              <h2 className={`${pacifico.className} text-gray-900 dark:text-white text-6xl hover:scale-105 transition-transform duration-300`}>
-                Umut Hökelek
-              </h2>
-            </Link>
+            <h2 
+              onClick={() => router.push('/')}
+              className={`${pacifico.className} text-gray-900 dark:text-white text-6xl hover:scale-105 transition-transform duration-300 cursor-pointer`}
+            >
+              Umut Hökelek
+            </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 font-medium mt-1">
-              Bilgisayar Mühendisi
+              Software Engineer
             </p>
           </div>
         </div>
       </div>
 
       <nav className="bg-white dark:bg-gray-800 shadow-lg mb-8 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-4xl mx-auto px-4 flex justify-between items-center">
-          <ul className="flex items-center gap-4">
-            {['home', 'register', 'about', 'contact'].map((tab) => (
-              <li key={tab}>
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="flex justify-between items-center h-16">
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none"
+              >
+                <span className="sr-only">Menüyü aç</span>
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  {isMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
+
+            <ul className="hidden md:flex items-center gap-4">
+              {['home', 'register', 'about', 'contact'].map((tab) => (
+                <li key={tab}>
+                  <Link
+                    href={tab === 'home' ? '/' : `/#${tab}`}
+                    className="px-5 py-4 rounded-lg transition-colors text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400"
+                  >
+                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <button
+              onClick={toggleDarkMode}
+              className="p-4 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              title={isDarkMode ? 'Açık Tema' : 'Koyu Tema'}
+            >
+              {isDarkMode ? '🌙' : '☀️'}
+            </button>
+          </div>
+        </div>
+
+        {isMenuOpen && (
+          <div className="md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {['home', 'register', 'about', 'contact'].map((tab) => (
                 <Link
+                  key={tab}
                   href={tab === 'home' ? '/' : `/#${tab}`}
-                  className="px-5 py-4 rounded-lg transition-colors text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 block"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   {tab.charAt(0).toUpperCase() + tab.slice(1)}
                 </Link>
-              </li>
-            ))}
-          </ul>
-          <button
-            onClick={toggleDarkMode}
-            className="p-4 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-            title={isDarkMode ? 'Açık Tema' : 'Koyu Tema'}
-          >
-            {isDarkMode ? '🌙' : '☀️'}
-          </button>
-        </div>
+              ))}
+            </div>
+          </div>
+        )}
       </nav>
 
       <div className="relative max-w-7xl mx-auto px-4 py-8 flex gap-8">
