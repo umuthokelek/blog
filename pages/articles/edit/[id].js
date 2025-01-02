@@ -56,12 +56,6 @@ export default function EditArticle({ article }) {
     content: article.content,
   });
 
-  const handleEditorChange = useMemo(() => {
-    return (value) => {
-      setFormData(prev => ({ ...prev, content: value }));
-    };
-  }, []);
-
   useEffect(() => {
     const isDark = localStorage.getItem('theme') === 'dark';
     setIsDarkMode(isDark);
