@@ -1,22 +1,31 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FaImage, FaTimes } from 'react-icons/fa';
 import { Inter } from 'next/font/google';
-import dynamic from 'next/dynamic';
+import ReactMarkdown from 'react-markdown';
 import { getAllArticles } from '../../../lib/articles';
-
-const MDEditor = dynamic(
-  () => import("@uiw/react-md-editor"),
-  { ssr: false }
-);
-
-// CSS'i client tarafında yükle
-if (typeof window !== 'undefined') {
-  import('easymde/dist/easymde.min.css');
-}
 
 const inter = Inter({ subsets: ['latin'] });
 
+// Add the MarkdownEditor component
+const MarkdownEditor = ({ value, onChange }) => {
+  return (
+    <div className="relative">
+      <textarea
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 focus:border-transparent font-mono min-h-[400px]"
+        placeholder="Markdown formatında içeriğinizi yazın..."
+      />
+      {/* Optional: Add a preview panel */}
+      <div className="prose dark:prose-invert mt-4">
+        <ReactMarkdown>{value}</ReactMarkdown>
+      </div>
+    </div>
+  );
+};
+
+// Remove unused imports and variables
 export async function getStaticPaths() {
   const articles = getAllArticles();
   const paths = articles.map((article) => ({
@@ -46,19 +55,6 @@ export default function EditArticle({ article }) {
     image: article.image,
     content: article.content,
   });
-
-  const editorOptions = useMemo(() => ({
-    spellChecker: false,
-    placeholder: 'Markdown formatında içeriğinizi yazın...',
-    status: false,
-    toolbar: [
-      'bold', 'italic', 'heading', '|',
-      'quote', 'unordered-list', 'ordered-list', '|',
-      'link', 'image', '|',
-      'preview', 'side-by-side', 'fullscreen', '|',
-      'guide'
-    ],
-  }), []);
 
   const handleEditorChange = useMemo(() => {
     return (value) => {
